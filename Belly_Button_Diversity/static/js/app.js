@@ -4,18 +4,16 @@ function buildMetadata(sample) {
 
   // Use `d3.json` to fetch the metadata for a sample
   const url = "/metadata/" + sample;
+  let selector = d3.select("#sample-metadata");
+  selector.html("");
 
   d3.json(url).then((metadata) => {
+    Object.entries(metadata).forEach(([key, value]) => {
+      selector.append("h6")
+      .text(key + ": " + value);
+    });
 
   });
-    // Use d3 to select the panel with id of `#sample-metadata`
-
-    // Use `.html("") to clear any existing metadata
-
-    // Use `Object.entries` to add each key and value pair to the panel
-    // Hint: Inside the loop, you will need to use d3 to append new
-    // tags for each key-value in the metadata.
-
     // BONUS: Build the Gauge Chart
     // buildGauge(data.WFREQ);
 }
@@ -57,9 +55,7 @@ function buildCharts(sample) {
     Plotly.newPlot("bubble", bubble_data)
   }
   
-  )};
-
-    // @TODO: Build a Bubble Chart using the sample data
+)};
 
 function init() {
   // Grab a reference to the dropdown select element
